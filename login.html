@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>log</title>
+</head>
+
+<body>
+    <div class="reges">
+        <form action="">
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="email" placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="password" placeholder="Enter password" required>
+            </div>
+            <div class="text-center">
+                <button onclick="savedata()">Submit</button>
+            </div>
+
+        </form>
+    </div>
+    <script>
+        const savedata = () => {
+            let email, password;
+            email = document.getElementById('email').value;
+            password = document.getElementById('password').value;
+
+            //sloca
+            // localStorage.setItem('username', username)
+            // localStorage.setItem('email', email)
+            // localStorage.setItem('password', password)
+            let user_record = new Array();
+            user_record = JSON.parse(localStorage.getItem('users')) ? JSON.parse(localStorage.getItem('users')) : []
+            if (user_record.some((v) => {
+                    return v.email == email && v.password == password
+
+                })) {
+                alert('login succesful')
+                let current_user = user_record.filter((v) => {
+                    return v.username == username && v.password == password
+                })[0]
+                localStorage.setItem('username', current_user.username);
+                localStorage.setItem('password', current_user.password);
+
+
+                window.location.href = 'profile.html'
+
+            } else {
+                alert('login failed')
+            }
+
+
+
+        }
+    </script>
+
+</body>
+
+</html>
